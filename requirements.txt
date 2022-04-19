@@ -1,0 +1,3 @@
+asyncio
+influxdb-client
+python-kasa
