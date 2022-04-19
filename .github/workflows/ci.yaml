@@ -12,6 +12,8 @@ on:
       - "develop"
     paths:
       - '*.py'
+      - 'requirements.txt'
+      - 'Dockerfile'
 
 env:
   TERM: 'xterm'
