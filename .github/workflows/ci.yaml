@@ -10,10 +10,6 @@ on:
       - "master"
       - "main"
       - "develop"
-    paths:
-      - '*.py'
-      - 'requirements.txt'
-      - 'Dockerfile'
 
 env:
   TERM: 'xterm'
