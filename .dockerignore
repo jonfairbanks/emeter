@@ -1,0 +1,15 @@
+.git
+.gitignore
+.gitattributes
+.cache
+*.md
+*.example
+LICENSE
+logo.*
+*.png
+*.gif
+*.jpg
+*.bmpr
+*.svg
+*.sample
+.env*
