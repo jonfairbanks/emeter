@@ -2,6 +2,7 @@ name: "CI"
 # SECRETS NEEDED:
 # DOCKER_USERNAME - Container Registry Username (github or dockerhub)
 # DOCKER_ACCESS_TOKEN - Container registry Personal access token with push privileges
+# SLACK_WEBHOOK_URL - Which Slack webhook to notify on job completion
 
 on:
   push:
