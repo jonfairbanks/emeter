@@ -6,16 +6,17 @@ from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 from kasa import SmartPlug
 
-DEVICE = "pi-zero-w2"
-DEBUG = os.getenv("DEBUG")
-HOST = "https://us-central1-1.gcp.cloud2.influxdata.com"
+DEBUG = os.getenv("DEBUG", False)
+DEVICE = os.getenv("DEVICE", "My Device")
+PLUG = os.getenv("PLUG")
+HOST = os.getenv("INFLUX_HOST", "https://us-central1-1.gcp.cloud2.influxdata.com") # noqa
 TOKEN = os.getenv("INFLUX_TOKEN")
-ORG = "fairplay89@gmail.com"
-BUCKET = "power-usage"
+ORG = os.getenv("INFLUX_ORG")
+BUCKET = os.getenv("INFLUX_BUCKET", "power-usage")
 
 
 async def main():
-    dev = SmartPlug("192.168.4.68")
+    dev = SmartPlug(PLUG)
     client = InfluxDBClient(url=HOST, token=TOKEN, org=ORG)
     write_api = client.write_api(write_options=SYNCHRONOUS)
 
