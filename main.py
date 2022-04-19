@@ -9,7 +9,7 @@ from kasa import SmartPlug
 DEBUG = os.getenv("DEBUG", False)
 DEVICE = os.getenv("DEVICE", "My Device")
 PLUG = os.getenv("PLUG")
-HOST = os.getenv("INFLUX_HOST", "https://us-central1-1.gcp.cloud2.influxdata.com")
+HOST = os.getenv("INFLUX_HOST", "https://us-central1-1.gcp.cloud2.influxdata.com") # noqa
 TOKEN = os.getenv("INFLUX_TOKEN")
 ORG = os.getenv("INFLUX_ORG")
 BUCKET = os.getenv("INFLUX_BUCKET", "power-usage")
