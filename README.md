@@ -11,7 +11,7 @@ Publish Kasa plug metrics to Influx Cloud
 - Setup your [Kasa smart plug](https://amzn.to/3JVZXzh) in the Kasa Home app
 - Gather the IP address associated with your plug
 - [Create a free Influx Cloud account](https://cloud2.influxdata.com/signup)
-- Create an Influx Cloud Bucket and API Token
+- Create an Influx Cloud Bucket (power-usage) and API Token
 
 ### Usage
 
