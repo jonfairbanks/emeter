@@ -35,3 +35,11 @@ The application can be launched with `docker-compose`:
 ```
 docker-compose up -d
 ```
+
+### Dashboard
+
+A sample dashboard is provided in this repo and can be imported:
+
+- Ensure that emeter is running
+- Login to Influx Cloud and go to Dashboards
+- Use the dropdown on `Create Dashboard` to import the template
