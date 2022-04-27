@@ -28,6 +28,8 @@ async def main():
         amps = dev.emeter_realtime.current
         milliamps = dev.emeter_realtime.current * 1000
         total = dev.emeter_realtime.total
+        daily = dev.emeter_today
+        monthly = dev.emeter_this_month
 
         if DEBUG:
             os.system('clear||cls')
@@ -37,6 +39,8 @@ async def main():
             print(amps, "amps")
             print(milliamps, "milliamps")
             print(total, "kWh")
+            print(daily, "kWh")
+            print(monthly, "kWh")
 
         # Write data to InfluxDB
         POINT = Point("power_usage") \
@@ -46,10 +50,12 @@ async def main():
             .field("amps", amps) \
             .field("milliamps", milliamps) \
             .field("total", total) \
+            .field("daily", daily) \
+            .field("monthly", monthly) \
             .time(datetime.utcnow(), WritePrecision.NS)
         write_api.write(bucket=BUCKET, record=POINT)
 
-        await asyncio.sleep(0.25)  # Pause between updates
+        await asyncio.sleep(1)  # Pause between updates
 
 if __name__ == "__main__":
     print("EMeter is running...")
