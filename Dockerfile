@@ -1,15 +1,26 @@
-FROM python:3-alpine
+FROM python:3.9-alpine
 
-# Setup venv
-ENV VIRTUAL_ENV=/opt/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+RUN pip install --upgrade pip
+RUN pip install pipenv
 
-# Install dependencies
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN apk add --no-cache tini
 
-# Run the app
-WORKDIR /usr/src/app
-COPY ./main.py .
-CMD ["python", "main.py"]
+RUN adduser -D python
+RUN mkdir /home/python/app/ && chown -R python:python /home/python/app
+WORKDIR /home/python/app
+
+ENTRYPOINT ["/sbin/tini", "--"]
+
+USER python
+
+RUN pip install --user pipenv
+
+ENV PATH="/home/python/.local/bin:${PATH}"
+
+COPY --chown=python:python Pipfile Pipfile
+RUN pipenv lock -r > requirements.txt
+RUN pip install --user -r requirements.txt
+
+COPY --chown=python:python . .
+
+CMD ["python", "-u", "main.py"]
