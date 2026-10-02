@@ -6,9 +6,9 @@ name = "pypi"
 [packages]
 asyncio = "*"
 influxdb-client = "*"
-python-kasa = "*"
+python-kasa = "==0.5.0"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.13"

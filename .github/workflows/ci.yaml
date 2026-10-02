@@ -2,7 +2,6 @@ name: "CI"
 # SECRETS NEEDED:
 # DOCKER_USERNAME - Container Registry Username (github or dockerhub)
 # DOCKER_ACCESS_TOKEN - Container registry Personal access token with push privileges
-# SLACK_WEBHOOK_URL - Which Slack webhook to notify on job completion
 
 on:
   push:
@@ -13,7 +12,6 @@ on:
 
 env:
   TERM: 'xterm'
-  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
   lint-code:
@@ -23,10 +21,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      - name: Setup Python 3.x
+      - name: Setup Python 3.13
         uses: actions/setup-python@v3
         with:
-          python-version: '3.x'
+          python-version: '3.13'
       
       - name: Lint w/ Flake8
         uses: py-actions/flake8@v2
@@ -86,7 +84,7 @@ jobs:
 
       - name: Cache Docker layers
         id: setup-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ steps.vars.outputs.sha_short }}
@@ -120,10 +118,3 @@ jobs:
           tags: ${{ steps.docker-tags.outputs.tags }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-
-      - name: Notify Slack
-        uses: act10ns/slack@v1
-        with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-        if: always()
