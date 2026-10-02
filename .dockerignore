@@ -17,3 +17,5 @@ Dockerfile
 docker-compose.yml
 images/
 dashboard/
+.venv
+__pycache__
