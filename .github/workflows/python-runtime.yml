@@ -26,9 +26,9 @@ jobs:
           pipenv verify
           pipenv sync
           pipenv run python -m pip check
-      - name: Check Application Imports
+      - name: Test Energy Collection
         run: |
-          pipenv run python -c "import main; from kasa import SmartPlug; assert all(hasattr(SmartPlug, attr) for attr in ('emeter_realtime', 'emeter_today', 'emeter_this_month'))"
+          pipenv run python -m unittest discover -s tests -v
       - name: Set Up QEMU
         uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
       - name: Set Up Docker Buildx

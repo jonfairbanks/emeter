@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 asyncio = "*"
 influxdb-client = "*"
-python-kasa = "==0.5.0"
+python-kasa = "==0.11.0.1"
 
 [dev-packages]
 
